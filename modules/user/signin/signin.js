@@ -1,10 +1,10 @@
+'use strict';
 var EventEmitter = require('events').EventEmitter;
 var utils = require('util');
 var crypto = require('crypto');
 const userinfo = require('../../../models').userinfo;
 
-
-function signin() {
+function signin(){
     EventEmitter.call(this);
 }
 utils.inherits(signin,EventEmitter);

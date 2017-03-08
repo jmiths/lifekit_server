@@ -3,14 +3,8 @@ var utils = require('util');
 var Expirable = require('expirable');
 var cache = new Expirable('5 minutes');
 
-/*
-This doesn't actually work, but as long as you don't access data within cache time it will invalidate
-cache.on('key:removed', function (expired) {
-    console.log('A key was removed');
-});
-*/
 function emergency() {
-    EventEmitter.call(this);
+	EventEmitter.call(this);
 }
 utils.inherits(emergency,EventEmitter);
 
