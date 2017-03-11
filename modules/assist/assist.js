@@ -3,12 +3,12 @@ var utils = require('util');
 
 const userinfo = require('../../models').userinfo;
 
-function update() {
+function assist() {
 	EventEmitter.call(this);
 }
-utils.inherits(update,EventEmitter);
+utils.inherits(assist,EventEmitter);
 
-exports.update = function(req, res) {
+exports.assist = function(req, res) {
 
     userinfo.findAll({
         where: {
@@ -25,12 +25,17 @@ exports.update = function(req, res) {
 		    res.status(405).send("expired access token");
         }
         else {
-            switch(req.params.type)
+            switch(req.route.path)
             {
-            case "location":
-                var locator = require('./location/location.js');
-                var location = new locator();
-                location.location(req, res, userinfos[0]);
+            case "/assist/create":
+                var creator = require('./create/create.js');
+                var create = new creator();
+                create.create(req, res, userinfos[0].dataValues.userid);
+                break;
+            case "/assist/comment":
+                var commenter = require('./comment/comment.js');
+                var comment = new commenter();
+                comment.comment(req, res, userinfos[0].dataValues.userid);
                 break;
             default:
                 res.sendStatus(404);

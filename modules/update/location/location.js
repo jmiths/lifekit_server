@@ -6,11 +6,18 @@ function location() {
 }
 utils.inherits(location,EventEmitter);
 
-location.prototype.location = function(req) {
-	/*
-		DB code to update location for access token
-	*/
-	return "Acknowledged";
+location.prototype.location = function(req, res, userinfo) {
+    
+    userinfo.update({
+        "last_lat": req.body.lat,
+        "last_lng": req.body.lng
+    })
+    .then(() => {
+		res.status(200).send("updated location");
+    })
+    .catch((error) => {
+		res.status(400).send("failed to update location");
+    })
 }
 
 module.exports = location;

@@ -1,10 +1,16 @@
 module.exports = function(app){
-	var emergency = require('./emergency/emergency.js');
-	app.get('/emergency/:type', emergency.emergency);
+    var assist = require('./assist/assist.js');
+    app.post('/assist/create',assist.assist);
+    app.put('/assist/comment',assist.assist);
 
-	var update = require('./update/update.js');
-	app.get('/update/:type', update.update);
+    var emergency = require('./emergency/emergency.js');
+    app.post('/emergency/start', emergency.emergency);
+    app.put('/emergency/end', emergency.emergency);
+    app.get('/emergency/:type', emergency.emergency);
 
-	var user = require('./user/user.js');
-	app.get('/user/:type', user.user);
+    var update = require('./update/update.js');
+    app.put('/update/:type', update.update);
+
+    var user = require('./user/user.js');
+    app.get('/user/:type', user.user);
 }

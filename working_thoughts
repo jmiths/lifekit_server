@@ -1,4 +1,0 @@
-Will have to spend money on an SMS api wrapper
-But, we can get: https://github.com/dtmtec/cordova-plugin-carrier the carrier
-And then port it to: https://en.wikipedia.org/wiki/SMS_gateway
-And just email it....

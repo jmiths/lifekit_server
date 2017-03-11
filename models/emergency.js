@@ -20,16 +20,24 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(1),
       allowNull: false
     },
-    location: {
-      type: DataTypes.STRING,
+    emergency_lat: {
+      type: DataTypes.FLOAT,
       allowNull: false
     },
-    started_at: {
+    emergency_lng: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    emergency_address: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    started_at: {
+      type: DataTypes.DATE,
       allowNull: false
     },
     ended_at: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       allowNull: true
     }
   }, {

@@ -24,8 +24,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    last_location: {
-      type: DataTypes.STRING,
+    last_lat: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    last_lng: {
+      type: DataTypes.FLOAT,
       allowNull: true
     }
   }, {
