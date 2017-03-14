@@ -15,14 +15,14 @@ comment.prototype.comment = function(req, res, userid) {
             "com": req.body.comment
         })
         .then(() => {
-            res.status(200).send("Comment recorded");
+            res.status(200).send({"status":"200","result":"Comment recorded"});
         })
         .catch((error) => {
-            res.status(400).send("Could not add comment");
+            res.status(400).send({"status":"200","result":"Could not add comment"});
         });
     })
     .catch(error => {
-        res.status(400).send("nothing found");
+        res.status(400).send({"status":"400","result":"nothing found"});
     });
 }
 

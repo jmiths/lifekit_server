@@ -1,17 +1,13 @@
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
-
 const emergency = require('../../../models').emergency;
 
 function start() {
-	EventEmitter.call(this);
 }
-utils.inherits(start,EventEmitter);
 
 start.prototype.start = function(req, res, userid) {
 
     emergency.create({
         "userid": userid,
+        "user_nickname" : req.body.user_nickname,
         "status": 0,
         "emergency_lat": req.body.lat,
         "emergency_lng": req.body.lng,
@@ -19,10 +15,10 @@ start.prototype.start = function(req, res, userid) {
         "started_at": new Date()
     })
     .then((emer) => {
-	    res.status(200).send({"emergencyid":emer.emergencyid});
+	    res.status(200).send({"status": "200","result":emer.emergencyid});
     })
     .catch((error) => {
-		res.status(400).send("failed to create emergency");
+		res.status(400).send({"status": "400","result":"failed to create emergency"});
     })
 }
 

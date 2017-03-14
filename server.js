@@ -14,10 +14,17 @@ var credentials = {key: privateKey, cert: certificate};
 var https = require('https');
 var httpsServer = https.createServer(credentials,app);
 
-httpsServer.listen(443);
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Method', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-requested-with,content-type');
+    next();
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+httpsServer.listen(443);
 
 require('./modules/routes.js')(app);

@@ -1,13 +1,9 @@
 'use strict';
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
 var crypto = require('crypto');
 const userinfo = require('../../../models').userinfo;
 
 function signin(){
-    EventEmitter.call(this);
 }
-utils.inherits(signin,EventEmitter);
 
 signin.prototype.signin = function(req,res) {
     var phone = req.query.phone;
@@ -21,7 +17,8 @@ signin.prototype.signin = function(req,res) {
     .then(userinfos => {
         var self = this;
         if(userinfos.length != 1) {
-            self.emit('signin', null);
+            res.status(400).send({"status":"400","result":"user not found"});
+            return;
         }
         else {
             var date = new Date(new Date().getTime() + 24*60*60*1000);
@@ -33,16 +30,19 @@ signin.prototype.signin = function(req,res) {
                     "access_token_expiration": date
                 })
                 .then(() => {
-                    self.emit('signin',accessToken);
+                    res.status(200).send({"status":"200","result":accessToken});
+                    return;
                 })
                 .catch((error) => {
-                    self.emit("signin", null);
+                    res.status(400).send({"status":"400","result":"failed to update"});
+                    return;
                 })
             });
         }
     })
     .catch((error) => {
-        self.emit("validate", null);
+        res.status(400).send({"status":"400","result":"nothing found"});
+        return;
     })
 }
 

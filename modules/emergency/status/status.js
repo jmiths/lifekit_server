@@ -27,14 +27,14 @@ status.prototype.status = function(req, res) {
             }
         })
         .then(userinfos => {
-            res.status(200).send(userinfos);
+            res.status(200).send({"status": "200", "result": userinfos});
         })
         .catch((error) => {
-            res.status(405).send("fail to get userinfos");
+            res.status(405).send({"status":"405","result":"fail to get userinfos"});
         })
     })
     .catch(error => {
-        res.status(400).send("nothing found");
+        res.status(400).send({"status":"400","result":"nothing found"});
     });
 }
 

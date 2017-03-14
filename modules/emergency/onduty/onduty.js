@@ -17,10 +17,10 @@ onduty.prototype.onduty = function(req, res) {
         }
     })
     .then(emergencies => {
-        res.status(200).send(emergencies);
+        res.status(200).send({"status":"200","result":emergencies});
     })
     .catch((error) => {
-		res.status(400).send("failed to get current emergencies");
+		res.status(400).send({"status":"200","result":"failed to get current emergencies"});
     })
 }
 

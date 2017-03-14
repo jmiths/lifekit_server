@@ -1,15 +1,11 @@
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
 var crypto = require('crypto');
 const userinfo = require('../../../models').userinfo;
 
 
 function validate() {
-    EventEmitter.call(this);
 }
-utils.inherits(validate,EventEmitter);
 
-validate.prototype.validate = function(req,cache) {
+validate.prototype.validate = function(req,res,cache) {
     var number = req.query.phone;
     var code = req.query.code;
     var cache_code = cache.get(number,true);
@@ -17,7 +13,6 @@ validate.prototype.validate = function(req,cache) {
     if(cache_code === code)
     {
         var refreshToken = null;
-        console.log("We need to do some sql for refresh token: ");
         crypto.randomBytes(32, function(err,buffer) {
             refreshToken = buffer.toString('hex');
             userinfo.create({
@@ -29,17 +24,16 @@ validate.prototype.validate = function(req,cache) {
                 
             })
             .then(() => {
-                self.emit('validate',refreshToken);
+                res.status(200).send({"status":"200","result":refreshToken});
             })
             .catch((error) => {
-                self.emit("validate", null);
+                res.status(400).send({"status":"400","result":"Could not validate"});
             })
         });
     }
     else
     {
-        console.log("Wrong code try again");
-        self.emit('validate',null);
+        res.status(400).send({"status":"400","result":"Wrong code"});
     }
 }
 

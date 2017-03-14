@@ -1,10 +1,5 @@
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
-
 function location() {
-	EventEmitter.call(this);
 }
-utils.inherits(location,EventEmitter);
 
 location.prototype.location = function(req, res, userinfo) {
     
@@ -13,10 +8,10 @@ location.prototype.location = function(req, res, userinfo) {
         "last_lng": req.body.lng
     })
     .then(() => {
-		res.status(200).send("updated location");
+		res.status(200).send({"status": "200", "result": "updated location"});
     })
     .catch((error) => {
-		res.status(400).send("failed to update location");
+		res.status(400).send({"status": "400", "result": "failed to update location"});
     })
 }
 

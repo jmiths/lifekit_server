@@ -1,12 +1,7 @@
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
-
 const userinfo = require('../../models').userinfo;
 
 function update() {
-	EventEmitter.call(this);
 }
-utils.inherits(update,EventEmitter);
 
 exports.update = function(req, res) {
 
@@ -19,10 +14,10 @@ exports.update = function(req, res) {
         var date = new Date();
         
         if(userinfos.length != 1) {
-		    res.status(404).send("access token invalid");
+		    res.status(404).send({"status":"404","result":"access token invalid"});
         }
         else if(date.valueOf() > userinfos[0].dataValues.access_token_expiration.valueOf()) {
-		    res.status(405).send("expired access token");
+		    res.status(405).send({"status":"405","result":"expired access token"});
         }
         else {
             switch(req.params.type)
@@ -39,7 +34,7 @@ exports.update = function(req, res) {
         }
     })
     .catch((error) => {
-		res.status(405).send("fail");
+		res.status(405).send({"status":"405","result":"fail"});
     });
 };
 

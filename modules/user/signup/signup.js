@@ -1,16 +1,11 @@
 'use strict';
 
-var EventEmitter = require('events').EventEmitter;
-var utils = require('util');
 var fs = require('fs');
-var credentials = JSON.parse(fs.readFileSync('/root/.twilio_creds', 'UTF-8'));
-var sendto = JSON.parse(fs.readFileSync('/root/.sendto', 'UTF-8'));
+var AWS = require('aws-sdk');
 
 
 function signup(){
-    EventEmitter.call(this);
 }
-utils.inherits(signup,EventEmitter);
 
 function makeCode() {
 	var high = 9999;
@@ -35,27 +30,29 @@ function getCodeForNum(phone,cache) {
 	}
 }
 
-signup.prototype.signup = function(req,cache) {
-	var accountSid = credentials.account_sid; // Your Account SID from www.twilio.com/console
-	var authToken =  credentials.authToken;   // Your Auth Token from www.twilio.com/console
-	var from = credentials.number;
+signup.prototype.signup = function(req,res,cache) {
 	var to = req.query.phone;
 
 	var code = getCodeForNum(req.query.phone,cache);
 
+/*    AWS.config.region = 'us-east-1';
+    var sns = new AWS.SNS();
 
-	var twilio = require('twilio');
-	var client = new twilio.RestClient(accountSid, authToken);
+    var sendto = '+1' + to;
+    var msg = 'Verify code for lifekit: ' + code;
 
-	client.messages.create({
-    		body: 'Verify code from lifekit: ' + code,
-    		to: to,  // Text this number
-    		from: from // From a valid Twilio number
-	}, function(err, message) {
-    		console.log(message,err);
-	});
+    var params = {
+        Message: msg,
+        MessageStructure: 'string',
+        PhoneNumber: sendto
+    };
 
-	return 200;
+    sns.publish(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+            else     console.log(data);           // successful response
+        });
+*/
+	res.status(200).send({"status":"200","result":code});
 };
 
 module.exports = signup;

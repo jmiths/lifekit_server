@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'userid'
       }
     },
+    user_nickname: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     status: {
       type: DataTypes.INTEGER(1),
       allowNull: false

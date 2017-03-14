@@ -10,10 +10,10 @@ create.prototype.create = function(req, res, userid) {
         "response": req.body.response
     })
     .then(() => {
-        res.status(200).send("Acknowledged");
+        res.status(200).send({"status":"200","result":"Acknowledged"});
     })
     .catch((error) => {
-        res.status(400).send("Failed to add to emergency");
+        res.status(400).send({"status":"200","result":"Failed to add to emergency"});
     })
 }
 
