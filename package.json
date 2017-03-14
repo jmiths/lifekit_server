@@ -1,0 +1,34 @@
+{
+  "name": "lifekit_server",
+  "version": "1.0.0",
+  "description": "Lifekit server",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmiths/lifekit_server.git"
+  },
+  "author": "Jake Smith and Jae Hoon Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmiths/lifekit_server/issues"
+  },
+  "homepage": "https://github.com/jmiths/lifekit_server#readme",
+  "dependencies": {
+    "aws-sdk": "^2.28.0",
+    "body-parser": "^1.17.1",
+    "crypto": "0.0.3",
+    "expirable": "^0.1.0",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "morgan": "^1.8.1",
+    "path": "^0.12.7",
+    "sequelize": "^3.30.2"
+  },
+  "devDependencies": {}
+}

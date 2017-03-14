@@ -1,5 +1,7 @@
 'use strict';
 
+process.env.TZ = 'America/New_York';
+
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
