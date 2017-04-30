@@ -5,7 +5,7 @@ var should = chai.should();
 
 chai.use(chaiHttp);
 
-describe("invalide URL", () => {
+describe("Test invalide URL", () => {
     describe("/GET invalide page", () => {
         it("it should GET 404 status", (done) => {
             chai.request(server)

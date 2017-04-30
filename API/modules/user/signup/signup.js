@@ -16,7 +16,7 @@ function makeCode() {
 	{
 		rand = "0" + rand;
 	}
-	return rand;
+	return (process.env.NODE_ENV != "test") ? rand : "0000";
 }
 
 function getCodeForNum(phone,cache) {

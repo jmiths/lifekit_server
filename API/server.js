@@ -32,7 +32,7 @@ else { // development
     var http = require('http');
     var httpServer = http.createServer(app);
     server = httpServer;
-    port = 80;
+    port = 8000;
 }
 
 app.use(function(req, res, next) {
