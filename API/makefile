@@ -11,5 +11,5 @@ models:
 	rmdir seeders migrations
 
 clean:
-	rm -rf node_modules models
+	rm -rf node_modules
 

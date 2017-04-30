@@ -22,11 +22,17 @@ if(env == "production") {
     server = httpsServer;
     port = 443;
 }
-else {
+else if(env == "test") {
     var http = require('http');
     var httpServer = http.createServer(app);
     server = httpServer;
     port = 8080;
+}
+else { // development
+    var http = require('http');
+    var httpServer = http.createServer(app);
+    server = httpServer;
+    port = 80;
 }
 
 app.use(function(req, res, next) {
@@ -44,4 +50,6 @@ server.listen(port);
 
 require('./modules/routes.js')(app);
 console.log("running API server on port " + port);
+
+module.exports = server;
 
