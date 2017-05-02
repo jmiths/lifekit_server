@@ -7,6 +7,7 @@ end.prototype.end = function(req, res) {
     emergency.findById(req.body.emergencyid)
     .then(emer => emer
         .update({
+            "status": 1,
             "ended_at": new Date()
         })
         .then(() => {
@@ -17,7 +18,7 @@ end.prototype.end = function(req, res) {
         })
     )
     .catch((error) => {
-		res.status(400).send("status": "400", "result": "failed to update emergency"});
+		res.status(400).send({"status": "400", "result": "failed to update emergency"});
     })
 }
 

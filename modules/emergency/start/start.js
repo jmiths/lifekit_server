@@ -4,6 +4,7 @@ function start() {
 }
 
 start.prototype.start = function(req, res, userid) {
+    console.log(req.body);
 
     emergency.create({
         "userid": userid,
