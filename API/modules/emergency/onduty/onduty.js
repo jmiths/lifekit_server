@@ -1,14 +1,12 @@
 const emergency = require('../../../models').emergency;
 const assister = require('../../../models').assister;
 
+var mysql = require('mysql');
+
 function onduty() {
 }
 
 onduty.prototype.onduty = function(req, res, userid) {
-    // TODO
-    // return only near current emergency
-    console.log(req.query.lat, req.query.lng);
-
     var previous_emergencies = [];
     assister.findAll({
         attributes: ['emergencyid'],
@@ -25,26 +23,24 @@ onduty.prototype.onduty = function(req, res, userid) {
     .then((emergencies) => {
         for(var i = 0; i < emergencies.length; i++)
             previous_emergencies.push(emergencies[i].dataValues.emergencyid);
-        emergency.findAll({
-            attributes: {
-                exclude:["userid"]
-            },
-            where: {
-                $and: [
-                    { "status": 0 },
-                    { "emergencyid": {
-                        $not: previous_emergencies
-                        }
-                    }
-                ]
+        var connection = mysql.createConnection(
+        {
+            localAddress    :   '127.0.0.1',
+            port            :   '9306'
+        });
+        connection.connect();
+        var queryString = "SELECT *, GEODIST(" + req.query.lat * (Math.PI/180) + "," + req.query.lng * (Math.PI/180) + ",lat,lng) as distance FROM emergency WHERE distance < 1000000000000 and id NOT IN (" + previous_emergencies + ") ORDER BY distance ASC LIMIT 0,100;"
+        connection.query(queryString, function(err,rows,fields) {
+            if(err)
+            {
+		        res.status(400).send({"status":"200","result":"failed to get current emergencies"});
             }
-        })
-        .then(send_emergency => {
-            res.status(200).send({"status":"200","result":send_emergency});
-        })
-        .catch((error) => {
-		    res.status(400).send({"status":"200","result":"failed to get current emergencies"});
-        })
+            else
+            {
+                res.status(200).send({"status":"200","result":rows});
+            }
+        });
+        connection.end();
     })
     .catch((error) => {
         res.status(400).send({"status":"400","result":"could not find emergencies"});

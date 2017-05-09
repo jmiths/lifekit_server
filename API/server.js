@@ -22,7 +22,7 @@ else if(env == "test") {
     port = 8888;
 }
 else { // development
-    port = 8000;
+    port = 8080;
 }
 
 app.use(function(req, res, next) {
