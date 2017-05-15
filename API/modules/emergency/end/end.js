@@ -5,8 +5,8 @@ function end() {
 
 end.prototype.end = function(req, res) {
     emergency.findById(req.body.emergencyid)
-    .then(emer => emer
-        .update({
+    .then(emer => {
+        emer.update({
             "ended_at": new Date()
         })
         .then(() => {
@@ -15,10 +15,11 @@ end.prototype.end = function(req, res) {
         .catch((error) => {
 		    res.status(400).send({"status": "400", "result": "failed to update emergency"});
         })
-    )
-    .catch((error) => {
-		res.status(400).send("status": "400", "result": "failed to update emergency"});
+    })
+    .catch(error => {
+		res.status(400).send({"status": "400", "result": "failed to update emergency"});
     })
 }
 
 module.exports = end;
+

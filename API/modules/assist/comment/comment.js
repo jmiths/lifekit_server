@@ -18,7 +18,7 @@ comment.prototype.comment = function(req, res, userid) {
             res.status(200).send({"status":"200","result":"Comment recorded"});
         })
         .catch((error) => {
-            res.status(400).send({"status":"200","result":"Could not add comment"});
+            res.status(400).send({"status":"400","result":"Could not add comment"});
         });
     })
     .catch(error => {
