@@ -12,27 +12,17 @@ var app = express();
 
 var server = null;
 var port = null;
+var http = require('http');
+var httpServer = http.createServer(app);
+server = httpServer;
 if(env == "production") {
-    var fs = require('fs');
-    var certificate = fs.readFileSync('/root/lifekit.cci.drexel.edu.crt','utf8');
-    var privateKey = fs.readFileSync('/root/lifekit.cci.drexel.edu.key','utf8');
-    var credentials = {key: privateKey, cert: certificate};
-    var https = require('https');
-    var httpsServer = https.createServer(credentials,app);
-    server = httpsServer;
-    port = 443;
-}
-else if(env == "test") {
-    var http = require('http');
-    var httpServer = http.createServer(app);
-    server = httpServer;
     port = 8080;
 }
+else if(env == "test") {
+    port = 8888;
+}
 else { // development
-    var http = require('http');
-    var httpServer = http.createServer(app);
-    server = httpServer;
-    port = 8000;
+    port = 8080;
 }
 
 app.use(function(req, res, next) {

@@ -34,7 +34,7 @@ exports.emergency = function(req, res) {
             case "/emergency/onduty":
                 var duty = require('./onduty/onduty.js');
                 var onduty = new duty();
-                onduty.onduty(req, res);
+                onduty.onduty(req, res, userinfos[0].userid);
                 break;
             case "/emergency/status":
                 var state = require('./status/status.js');

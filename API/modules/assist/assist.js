@@ -32,6 +32,11 @@ exports.assist = function(req, res) {
                 var comment = new commenter();
                 comment.comment(req, res, userinfos[0].dataValues.userid);
                 break;
+            case "/assist/get":
+                var getter = require('./get/get.js');
+                var get = new getter();
+                get.get(req, res, userinfos[0].dataValues.userid);
+                break;
             default:
                 res.sendStatus(404);
                 break;
