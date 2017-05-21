@@ -14,10 +14,10 @@ exports.update = function(req, res) {
         var date = new Date();
         
         if(userinfos.length != 1) {
-		    res.status(404).send({"status":"404","result":"access token invalid"});
+            res.status(404).send({"status":"404","result":"access token invalid"});
         }
         else if(date.valueOf() > userinfos[0].dataValues.access_token_expiration.valueOf()) {
-		    res.status(405).send({"status":"405","result":"expired access token"});
+            res.status(405).send({"status":"405","result":"expired access token"});
         }
         else {
             switch(req.params.type)
@@ -28,13 +28,13 @@ exports.update = function(req, res) {
                 location.location(req, res, userinfos[0]);
                 break;
             default:
-                res.sendStatus(404);
+                res.status(404).send({"status": "404", "result": "invalid url"});
                 break;
             }
         }
     })
     .catch((error) => {
-		res.status(405).send({"status":"405","result":"fail"});
+        res.status(405).send({"status":"405","result":"fail"});
     });
 };
 

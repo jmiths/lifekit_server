@@ -19,7 +19,7 @@ describe("Test API related with update", () => {
         });
     });
     describe("/PUT update location with right access token", () => {
-        it("it should GET 404 status", (done) => {
+        it("it should GET 200 status", (done) => {
             chai.request(server)
                 .put("/update/location?accesstoken=this_is_test_access_token")
                 .send({lat: "123", lng: "456"})

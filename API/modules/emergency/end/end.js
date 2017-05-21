@@ -25,14 +25,14 @@ end.prototype.end = function(req, res) {
                     console.log(err);
             });
             connection.end();
-	        res.status(200).send({"status": "200", "result": "updated emergency"});
+            res.status(200).send({"status": "200", "result": "updated emergency"});
         })
         .catch((error) => {
-		    res.status(400).send({"status": "400", "result": "failed to update emergency"});
+            res.status(400).send({"status": "400", "result": "failed to update emergency"});
         })
     })
     .catch(error => {
-		res.status(400).send({"status": "400", "result": "failed to update emergency"});
+        res.status(400).send({"status": "400", "result": "failed to find emergency or error from db"});
     })
 }
 
