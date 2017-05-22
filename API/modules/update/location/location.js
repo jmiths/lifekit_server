@@ -7,10 +7,10 @@ location.prototype.location = function(req, res, userinfo) {
         "last_lng": req.body.lng
     })
     .then(() => {
-		res.send({"status": "200", "result": "updated location"});
+        res.status(200).send({"status": "200", "result": "updated location"});
     })
     .catch((error) => {
-		res.status(400).send({"status": "400", "result": "failed to update location"});
+        res.status(400).send({"status": "400", "result": "failed to update location"});
     })
 }
 

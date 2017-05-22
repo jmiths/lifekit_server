@@ -20,7 +20,7 @@ status.prototype.status = function(req, res) {
         //res.status(200).send(assisters);
         userinfo.findAll({
             attributes: {
-                exclude:["userid", "phone_number", "refresh_token", "access_token", "access_token_expiration"]
+                exclude:["phone_number", "refresh_token", "access_token", "access_token_expiration"]
             },
             where: {
                 "userid": userids

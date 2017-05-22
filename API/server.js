@@ -14,15 +14,20 @@ var server = null;
 var port = null;
 var http = require('http');
 var httpServer = http.createServer(app);
+var logfilename = "./default.log";
+
 server = httpServer;
 if(env == "production") {
     port = 8080;
+    logfilename = "./lifekit_server.log";
 }
 else if(env == "test") {
     port = 8888;
+    logfilename = "./lifekit_server_test.log";
 }
 else { // development
     port = 8080;
+    logfilename = "./lifekit_server_dev.log";
 }
 
 app.use(function(req, res, next) {
@@ -32,6 +37,10 @@ app.use(function(req, res, next) {
     next();
 });
 
+var fs = require('fs');
+app.use(morgan("common", {
+    stream: fs.createWriteStream(logfilename, {flags: 'a'})
+}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
