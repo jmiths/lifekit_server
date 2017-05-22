@@ -30,7 +30,20 @@ describe("Test API related with emergency", () => {
                 });
         });
     });
-    describe("/PUT end emergency", () => {
+    describe("/PUT end emergency with wrong emergencyid", () => {
+        it("it should GET 200 status", (done) => {
+            chai.request(server)
+                .put("/emergency/end?accesstoken=this_is_test_access_token")
+                .send({"emergencyid": "test"})
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.property("result").eql("failed to find emergency or error from db");
+                    done();
+                });
+        });
+    });
+ 
+    describe("/PUT end emergency with right emergencyid", () => {
         it("it should GET 200 status", (done) => {
             chai.request(server)
                 .put("/emergency/end?accesstoken=this_is_test_access_token")
@@ -42,5 +55,6 @@ describe("Test API related with emergency", () => {
                 });
         });
     });
+
 });
 
