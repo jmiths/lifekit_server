@@ -26,7 +26,7 @@ else if(env == "test") {
     logfilename = "./lifekit_server_test.log";
 }
 else { // development
-    port = 8080;
+    port = 9090;
     logfilename = "./lifekit_server_dev.log";
 }
 
