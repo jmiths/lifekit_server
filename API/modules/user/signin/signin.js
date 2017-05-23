@@ -7,7 +7,7 @@ function signin(){
 
 signin.prototype.signin = function(req,res) {
     var phone = req.query.phone;
-    var refresh = req.query.refreshtoken;
+    var refresh = req.query.refreshToken;
     var accessToken = null;
     userinfo.findAll({
         where: {
