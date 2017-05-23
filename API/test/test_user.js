@@ -44,7 +44,7 @@ describe("Test API related with user", () => {
     describe("/GET user signin with invalide phone number", () => {
         it("it should GET 400 status and result is user not found", (done) => {
             chai.request(server)
-                .get("/user/signin?phone=0000000000&&refreshToken=this_is_test_refresh_token")
+                .get("/user/signin?phone=0000000000&&refreshtoken=this_is_test_refresh_token")
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.have.property("result").eql("user not found");
@@ -55,7 +55,7 @@ describe("Test API related with user", () => {
     describe("/GET user signin with valide phone number and invalide refresh token", () => {
         it("it should GET 400 status and result is user not found", (done) => {
             chai.request(server)
-                .get("/user/signin?phone=0123456789&&refreshToken=this_is_not_test_refresh_token")
+                .get("/user/signin?phone=0123456789&&refreshtoken=this_is_not_test_refresh_token")
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.have.property("result").eql("user not found");
