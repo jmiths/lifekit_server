@@ -33,7 +33,7 @@ onduty.prototype.onduty = function(req, res, userid) {
         connection.query(queryString, function(err,rows,fields) {
             if(err)
             {
-		        res.status(400).send({"status":"200","result":"failed to get current emergencies"});
+                res.status(400).send({"status":"200","result":"failed to get current emergencies"});
             }
             else
             {

@@ -32,10 +32,10 @@ start.prototype.start = function(req, res, userid) {
                 console.log(err)
         });
         connection.end();
-	    res.status(200).send({"status": "200","result":emer.emergencyid});
+        res.status(200).send({"status": "200","result":emer.emergencyid});
     })
     .catch((error) => {
-		res.status(400).send({"status": "400","result":"failed to create emergency"});
+        res.status(400).send({"status": "400","result":"failed to create emergency"});
     })
 }
 

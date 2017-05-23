@@ -55,6 +55,5 @@ describe("Test API related with emergency", () => {
                 });
         });
     });
-
 });
 
