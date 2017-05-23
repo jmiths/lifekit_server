@@ -1,4 +1,5 @@
 API/config/*
 API/node_modules/*
 API/*.log
+API/coverage/*
 
