@@ -35,7 +35,7 @@ signup.prototype.signup = function(req,res,cache) {
 
     var code = getCodeForNum(req.query.phone,cache);
 
-/*    AWS.config.region = 'us-east-1';
+    AWS.config.region = 'us-east-1';
     var sns = new AWS.SNS();
 
     var sendto = '+1' + to;
@@ -51,7 +51,7 @@ signup.prototype.signup = function(req,res,cache) {
         if (err) console.log(err, err.stack); // an error occurred
             else     console.log(data);           // successful response
         });
-*/
+
     res.status(200).send({"status":"200","result":code});
 };
 

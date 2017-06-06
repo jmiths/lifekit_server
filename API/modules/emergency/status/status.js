@@ -16,7 +16,7 @@ status.prototype.status = function(req, res) {
         for(var i = 0; i<assisters.length; i++) {
             userids.push(assisters[i].dataValues.userid);
         }
-        console.log(userids);
+        // console.log(userids);
         //res.status(200).send(assisters);
         userinfo.findAll({
             attributes: {

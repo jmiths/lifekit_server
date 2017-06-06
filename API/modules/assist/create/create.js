@@ -17,7 +17,7 @@ create.prototype.create = function(req, res, userid) {
                     "response": req.body.response
                 })
                 .then(() => {
-                    res.status(200).send({"status":"200","result":"Acknowledged"});
+                    res.status(200).send({"status":"200","result":"changed response"});
                 })
                 .catch((error) => {
                     res.status(400).send({"status":"400","result":"Could not update assister's response"});
