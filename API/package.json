@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/jmiths/lifekit_server#readme",
   "dependencies": {
+    "aws-sdk": "^2.28.0",
     "body-parser": "^1.17.1",
     "crypto": "0.0.3",
     "expirable": "^0.1.0",
